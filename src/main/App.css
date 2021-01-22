@@ -2,19 +2,39 @@
   text-align: center;
 }
 
+.App-logo-login {
+  width: 60%;
+  pointer-events: none;
+  padding-bottom: 5%;
+}
+
 .App-logo {
-  height: 40vmin;
+  width: 20%;
   pointer-events: none;
 }
 
+.App-logo-loading {
+  width: 20%;
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
+  .App-logo-login {
     animation: App-logo-spin infinite 1.5s;
   }
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo-loading {
+    animation: App-logo-infinspin infinite 21s;
+  }
+}
+
 .App-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -29,16 +49,46 @@
 }
 
 @keyframes App-logo-spin {
-  25% {
-    transform: rotate(15deg);
+   25% {
+     transform: rotate(15deg);
+   }
+   50% {
+     transform: rotate(-30deg);
+   }
+   75% {
+     transform: rotate(5deg);
+   }
+   100% {
+     transform: rotate(0deg);
+   }
+ }
+
+  @keyframes App-logo-infinspin {
+    25% {
+      transform: rotate(90deg);
+    }
+    50% {
+      transform: rotate(180deg);
+    }
+    75% {
+      transform: rotate(270deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
-  50% {
-    transform: rotate(-30deg);
-  }
-  75% {
-    transform: rotate(5deg);
-  }
-  100% {
-    transform: rotate(0deg);
-  }
+
+.clicked {
+  fill: red;
+}
+
+p {
+  color: black;
+}
+
+.login {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

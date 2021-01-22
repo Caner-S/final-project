@@ -2,44 +2,69 @@ import firebase from "../../config/firebase";
 
 const db = firebase.firestore();
 
-export function getBookingsByUserID(userId) {
-    return db.collection("bookings").doc(userId);
+export async function getBookingsByUserID(userId) {
+    let bookings = [];
+    await db.collection("bookings").where("userId", "==", userId).get().then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+                bookings.push(doc)
+        });
+    })
+        .catch(function(error) {
+            console.log("Error getting documents: ", error);
+        });
+
+    return bookings;
+
 }
 
-export function getAllBookings() {
-    return db.collection("bookings").orderBy('userId');
+export async function getAllBookings() {
+    let bookings = [];
+    await db.collection("bookings").orderBy('userId').get().then(function (querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            bookings.push(doc)
+        });
+    })
+        .catch(function(error) {
+            console.log("Error getting documents: ", error);
+        });
+
+    return bookings;
 }
 
-export function getUnavailableBookings(startTime, endTime) {
+export async function getAvailableSpaces(startTime, endTime, today) {
     let bookingIDs = [];
+    let availableSpaces = [];
+
+    const startTimeToday =  new Date(today).valueOf();
     const startTimeDate =  new Date(startTime).valueOf();
     const endTimeDate =  new Date(endTime).valueOf();
-    db.collection("bookings").where("arrivalDate", ">=", startTimeDate).where("arrivalDate", "<", endTimeDate)
-        .get().then(function(querySnapshot) {
+
+   // if (startTime < "departureDate" && endTime > "arrivalDate")  {
+
+    const resArrival = await db.collection("bookings").where("departureDate", ">", startTimeDate).where("departureDate", "<", startTimeToday)
+        .get();
+    resArrival.forEach(doc => {
+        if(endTimeDate > doc.data().arrivalDate){
+            bookingIDs.push(doc.data().spaceId);
+        }
+
+    })
+
+
+   await db.collection("spaces").get()
+        .then(function(querySnapshot) {
             querySnapshot.forEach(function(doc) {
-                bookingIDs.push((doc.id).toString());
+                if(!bookingIDs.includes(doc.id)) {
+                    availableSpaces.push(doc)
+                    //console.log(doc.id);
+                }
             });
         })
         .catch(function(error) {
             console.log("Error getting documents: ", error);
         });
 
-    db.collection("bookings").where("departureDate", ">", startTimeDate).where("departureDate", "<=", endTimeDate)
-        .get().then(function(querySnapshot) {
-            querySnapshot.forEach(function(doc) {
-                bookingIDs.push((doc.id).toString());
-            });
-        })
-        .catch(function(error) {
-            console.log("Error getting documents: ", error);
-        });
-
-    bookingIDs.push("test");
-    bookingIDs.push("test");
-    console.log(bookingIDs);
-    const unique = [...new Set(bookingIDs)];
-    console.log(unique);
-    return bookingIDs;
+   return availableSpaces
 }
 
 export function makeBooking(spaceId, userId, arrivalDate, departureDate) {
@@ -51,6 +76,6 @@ export function makeBooking(spaceId, userId, arrivalDate, departureDate) {
     });
 }
 
-export function deleteBooking() {
-    return db.collection("bookings").orderBy('userId');
+export function deleteBooking(bookingId) {
+    return  db.collection("bookings").doc(bookingId).delete();
 }

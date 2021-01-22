@@ -2,7 +2,7 @@ import firebase from "../../config/firebase";
 
 const db = firebase.firestore();
 
-export function getspacesByID(spaceId) {
+export function getSpaceByID(spaceId) {
     return db.collection("spaces").doc(spaceId);
 }
 

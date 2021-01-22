@@ -1,6 +1,6 @@
 import React from 'react';
 import firebase from "../../config/firebase";
-import {makeBooking, getUnavailableBookings} from "../dao/BookingDao";
+import {makeBooking, getAvailableSpaces} from "../dao/BookingDao";
 import TextField from '@material-ui/core/TextField';
 
 
@@ -23,27 +23,11 @@ class BookingForm extends React.Component {
 
     makeBooking = e => {
         e.preventDefault();
-        //makeBooking(this.state.spaceId, this.state.userId, this.state.arrivalDate, this.state.departureDate);
-        getUnavailableBookings(this.state.arrivalDate, this.state.departureDate);
+        makeBooking(this.state.spaceId, this.state.userId, this.state.arrivalDate, this.state.departureDate);
+        //getAvailableSpaces(this.state.arrivalDate, this.state.departureDate);
 
     };
 
-    getAvailableRooms= e => {
-        e.preventDefault();
-
-        /*const spaceRef = db.collection('spaces').add({
-            spaceId: this.state.spaceId,
-            userId:  this.state.userId,
-            arrivalDate: this.state.arrivalDate,
-            departureDate: this.state.departureDate
-        });*/
-        this.setState({
-            spaceId: '',
-            userId: '',
-            arrivalDate: '',
-            departureDate: ''
-        });
-    };
 
     render() {
         return (
@@ -51,14 +35,14 @@ class BookingForm extends React.Component {
             <h4>Make a Booking</h4>
             <form onSubmit={this.makeBooking}>
                 <input
-                    type="number"
+                    type="text"
                     name="spaceId"
                     placeholder="SpaceForm id"
                     onChange={this.updateInput}
                     value={this.state.spaceId}
                 />
                 <input
-                    type="number"
+                    type="text"
                     name="userId"
                     placeholder="User Id"
                     onChange={this.updateInput}

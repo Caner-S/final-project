@@ -1,0 +1,24 @@
+.NavUl {
+    list-style-type: none;
+    margin: 0;
+    padding-bottom: 3%;
+    overflow: hidden;
+    background-color: transparent;
+}
+
+.NavLi {
+    float: left;
+}
+
+.NavLi a {
+    display: block;
+    color: #12ABDB;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.NavLi a:hover {
+    background-color: lightgray;
+;
+}

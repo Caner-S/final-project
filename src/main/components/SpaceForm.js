@@ -1,5 +1,4 @@
 import React from 'react';
-import {getUnavailableBookings} from "../dao/BookingDao";
 import {addSpace} from "../dao/SpaceDao";
 
 class SpaceForm extends React.Component {
