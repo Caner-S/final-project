@@ -6,11 +6,10 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
-import Button from "@material-ui/core/Button";
-import {confirmationBox} from "./ConfirmationBox";
 import "./Spaces.css";
-import {deleteRequest, getAllRequests} from "../dao/RequestDao";
+import { getAllPendingRequests, updateStatus} from "../dao/RequestDao";
 import {makeBooking} from "../dao/BookingDao";
+import Confirm from "./Confirm";
 
 class AdminRequests extends React.Component {
     constructor() {
@@ -29,17 +28,18 @@ class AdminRequests extends React.Component {
     }
 
     async getRequests() {
-        this.setState({requests: await getAllRequests()});
+        this.setState({requests: await getAllPendingRequests()});
     }
 
     approveRequest(request){
         //set status to approved
-        makeBooking(request.data().userId, request.data().spaceId, request.data().arrivalDate, request.data().departureDate);
-
+        makeBooking(request.data().spaceId, request.data().userId, request.data().arrivalDate, request.data().departureDate);
+        updateStatus(request.id, "Approved");
     }
 
-    cancelRequest(){
+    cancelRequest(request){
         //set status to denied
+        updateStatus(request.id, "Denied");
 
     }
 
@@ -71,19 +71,14 @@ class AdminRequests extends React.Component {
                                     <TableCell align="right">{new Date(request.data().departureDate).toLocaleString()}</TableCell>
                                     <TableCell align="right">{request.data().businessCase}</TableCell>
                                     <TableCell align="right">
-                                        <Button variant="contained" color="primary" onClick={() => confirmationBox(request.id,'Are you sure you want to approve request ' + request.id + '?',() => this.approveRequest(request))}>
-                                            Approve
-                                        </Button>
+                                        <Confirm buttonText="Approve" title={"Approve a request"} description={"lol"} onAccept={() => { this.approveRequest(request)}} />
 
                                     </TableCell>
                                     <TableCell align="right">
-                                        <Button variant="contained" color="primary" onClick={() => confirmationBox(request.id,'Are you sure you want to cancel request ' + request.id + '?',() => deleteRequest(request.id))}>
-                                            Cancel
-                                        </Button>
+                                        <Confirm buttonText="Deny" title={"Deny a request"} description={"lol"} onAccept={() => { this.cancelRequest(request)}} />
 
                                     </TableCell>
                                 </TableRow>
-
 
                             ))}
                         </TableBody>

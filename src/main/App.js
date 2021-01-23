@@ -6,31 +6,44 @@ import {
 } from 'react-router-dom';
 import logo from '../logo.png';
 import './App.css';
-import SpaceForm from "./components/SpaceForm";
 import Login from "./components/Login";
 import firebase from '../config/firebase';
 import NavBar from "./components/NavBar/NavBar";
 import MyBookings from "./components/MyBookings";
 import ParticlesBg from 'particles-bg';
 import {getAdmin} from "./dao/UserDao";
-import AllBookings from "./components/AllBookings";
 import Home from "./components/Home";
 import Admin from "./components/Admin";
 import Stats from "./components/Stats";
+import {getSiteInformation} from "./dao/EnvironmentDao";
 
 function App() {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   const [auth, setAuth] = useState(false);
-  const [businessCase, setBusinessCase] = useState(true);
+  const [businessCase, setBusinessCase] = useState(false);
+
+  const mystyle = {
+    width: "100%",
+    height: "100%",
+    position: "fixed",
+    zIndex: "-100",
+    top: "0px",
+    left: "0px",
+  };
 
   useEffect( () => {
+    getSiteInformation().onSnapshot(snapshot => {
+      if (snapshot.data() === undefined) {
+        setBusinessCase(false);
+      } else {
+        setBusinessCase(snapshot.data().businessCase);
+      }});
 
     setTimeout(() => setLoading(false), 1000);
     const unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => {
       setUser(!!user);
         getAdmin(firebase.auth().currentUser.uid).onSnapshot(res => {
-          console.log(res.docs[0]);
           if(res.docs[0] !== undefined){
             setAuth(true);
           }
@@ -42,7 +55,10 @@ function App() {
 
   function adminPage() {
     if(auth){
-      return <Route path="/admin" component={Admin}/>
+
+      return <Route path="/admin" >
+        <Admin businessCase={businessCase}/>
+      </Route>
     }
   }
 
@@ -78,8 +94,10 @@ function App() {
 
       )}
       </div>
-        <ParticlesBg type="circle" color={["#c0fdff", "#d0d1ff","#deaaff","#ecbcfd","#ffcbf2",]} num={5} bg={true} />
+        <ParticlesBg id="testtt" type="circle" color={["#c0fdff", "#d0d1ff","#deaaff","#ecbcfd","#ffcbf2",]} num={5} bg={true} classname="background"/>
         </Router>
+
+
 
   );
 }

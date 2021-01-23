@@ -7,9 +7,8 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
-import Button from "@material-ui/core/Button";
-import {confirmationBox} from "./ConfirmationBox";
 import "./Spaces.css";
+import Confirm from "./Confirm";
 
 class AllBookings extends React.Component {
     constructor() {
@@ -57,9 +56,7 @@ class AllBookings extends React.Component {
                                     <TableCell align="right">{new Date(booking.data().arrivalDate).toLocaleString()}</TableCell>
                                     <TableCell align="right">{new Date(booking.data().departureDate).toLocaleString()}</TableCell>
                                     <TableCell align="right">
-                                        <Button variant="contained" color="primary" onClick={() => confirmationBox(booking.id,'Are you sure you want to cancel booking ' + booking.id + '?',() => deleteBooking(booking.id))}>
-                                            Cancel Booking
-                                        </Button>
+                                        <Confirm buttonText="Cancel Booking" title={"Cancel a booking"} description={"lol"} onAccept={() => { deleteBooking(booking.id)}} />
 
                                     </TableCell>
                                 </TableRow>

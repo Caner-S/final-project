@@ -10,10 +10,10 @@ import Paper from '@material-ui/core/Paper';
 import {getAvailableSpaces, makeBooking} from "../dao/BookingDao";
 import TextField from "@material-ui/core/TextField";
 import firebase from "../../config/firebase";
-import {confirmationBox} from "./ConfirmationBox";
 import './Spaces.css';
 import TablePagination from "@material-ui/core/TablePagination";
-import Admin from "./Admin";
+import Confirm from "./Confirm";
+import ConfirmInput from "./ConfirmInput";
 
 
 class Spaces extends React.Component {
@@ -88,6 +88,15 @@ class Spaces extends React.Component {
         this.setState({page: 0, rowsPerPage: rowsPerPage});
     };
 
+    businessCase(space){
+        if(this.props.businessCase){
+            return <ConfirmInput buttonText="Request Now" title={"Book a space"} description={"lol"} spaceId={space.id} user={firebase.auth().currentUser.uid} arrive={this.state.arrivalDate} depart={this.state.departureDate}/>
+        } else {
+            return <Confirm buttonText="Book Now" title={"Book a space"} description={"lol"} onAccept={() => { makeBooking(space.id, firebase.auth().currentUser.uid, this.state.arrivalDate, this.state.departureDate)}} />
+
+        }
+    }
+
 
 
     render() {
@@ -143,10 +152,7 @@ class Spaces extends React.Component {
                     <TableCell align="right">{space.data().type}</TableCell>
                     <TableCell align="right">{space.data().floor}</TableCell>
                     <TableCell align="right">
-
-                        <Button variant="contained" onClick={() => confirmationBox(space.id,'Are you sure you want to make a booking for space ' + space.data().number + '?',() => makeBooking(space.id, firebase.auth().currentUser.uid, this.state.arrivalDate, this.state.departureDate)) }>
-                            Book now
-                        </Button>
+                        {this.businessCase(space)}
                     </TableCell>
                 </TableRow>
 

@@ -6,64 +6,60 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import {deleteBooking, getBookingsByUserID} from "../dao/BookingDao";
 import firebase from "../../config/firebase";
 import "./MyBookings.css";
 import Confirm from "./Confirm";
+import {deleteRequest, getRequestByUserId} from "../dao/RequestDao";
 
 
 class MyBookings extends React.Component {
 
+
     constructor() {
         super();
         this.state = {
-            spaces: [],
-            bookings: [],
-            open: false,
-            id: 'test',
+            requests: [],
         };
     }
 
     componentDidMount() {
 
-        this.getBookingsAndSpaces();
+        this.getRequests();
 
     }
 
-    async getBookingsAndSpaces() {
-        this.setState({bookings: await getBookingsByUserID(firebase.auth().currentUser.uid)});
+    async getRequests() {
+        this.setState({bookings: await getRequestByUserId(firebase.auth().currentUser.uid)});
     }
 
 
     render() {
-        let {bookings} = this.state;
+        let {requests} = this.state;
         return (
             <div className="BookingsBorder">
                 <TableContainer component={Paper}>
                     <Table aria-label="simple table">
                         <TableHead>
                             <TableRow>
-                                <TableCell>Seat&nbsp;Number</TableCell>
-                                <TableCell align="right">Type</TableCell>
-                                <TableCell align="right">Section</TableCell>
-                                <TableCell align="right">Floor</TableCell>
+                                <TableCell>Space&nbsp;Id</TableCell>
+                                <TableCell align="right">Status</TableCell>
+                                <TableCell align="right">Business&nbsp;Case</TableCell>
                                 <TableCell align="right">Arrival Time</TableCell>
                                 <TableCell align="right">Departure Time</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {bookings.map(booking => (
-                                <TableRow key={booking.id} >
+                            {requests.map(request => (
+                                <TableRow key={request.id} >
                                     <TableCell component="th" scope="row">
-                                        {booking.id}
+                                        {request.data().spaceId}
                                     </TableCell>
-                                    <TableCell align="right">test</TableCell>
-                                    <TableCell align="right">test</TableCell>
-                                    <TableCell align="right">test</TableCell>
-                                    <TableCell align="right">{new Date(booking.data().arrivalDate).toLocaleString()}</TableCell>
-                                    <TableCell align="right">{new Date(booking.data().departureDate).toLocaleString()}</TableCell>
+                                    <TableCell align="right"> {request.data().status}</TableCell>
+                                    <TableCell align="right"> {request.data().businessCase}</TableCell>
+                                    <TableCell align="right">{new Date(request.data().arrivalDate).toLocaleString()}</TableCell>
+                                    <TableCell align="right">{new Date(request.data().departureDate).toLocaleString()}</TableCell>
                                     <TableCell align="right">
-                                        <Confirm buttonText="Cancel Booking" title={"Cancel a booking"} description={"lol"} onAccept={() => { deleteBooking(booking.id)}} />
+                                        <Confirm buttonText="Cancel Request" title={"Cancel a Request"} description={"lol"} onAccept={() => { deleteRequest(request.id)}} />
 
                                     </TableCell>
                                 </TableRow>

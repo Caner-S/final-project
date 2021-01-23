@@ -24,7 +24,6 @@ class BookingForm extends React.Component {
     makeBooking = e => {
         e.preventDefault();
         makeBooking(this.state.spaceId, this.state.userId, this.state.arrivalDate, this.state.departureDate);
-        //getAvailableSpaces(this.state.arrivalDate, this.state.departureDate);
 
     };
 

@@ -42,6 +42,24 @@ export async function getAllRequests() {
     return requests;
 }
 
+export async function getAllPendingRequests() {
+    let requests = [];
+    await db.collection("requests").where("status", "==", "Pending").get().then(function (querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            requests.push(doc)
+        });
+    })
+        .catch(function(error) {
+            console.log("Error getting documents: ", error);
+        });
+
+    return requests;
+}
+
 export function deleteRequest(requestId) {
     return  db.collection("requests").doc(requestId).delete();
+}
+
+export function updateStatus(id, status){
+    return db.collection("requests").doc(id).update({status: status});
 }
