@@ -18,11 +18,17 @@ class AllBookings extends React.Component {
             open: false,
             id: 'test',
         };
+        getAllBookings().then(doc => {
+            this.setState({ bookings: doc });
+        })
     }
 
     componentDidMount() {
 
-        this.getBookings();
+        //this.getBookings();
+        getAllBookings().then(doc => {
+            this.setState({ bookings: doc });
+        })
 
     }
 

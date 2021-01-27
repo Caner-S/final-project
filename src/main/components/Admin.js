@@ -9,6 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import {Button} from "@material-ui/core";
 import {updateSiteInformation} from "../dao/EnvironmentDao";
+//import SnackbarSuccess from "./SnackbarSuccess";
 
 class Admin extends React.Component {
     constructor() {
@@ -18,22 +19,25 @@ class Admin extends React.Component {
         };
     }
 
-    /*componentDidMount() {
-        this.setState({businessCase: this.props.businessCase});
-    }*/
-
     handleChange = (event) => {
-        console.log(this.state.businessCase);
         this.setState({businessCase: event.target.value});
-        console.log(this.state.businessCase);
     };
 
-    printttt = e => {
+    submitBusinessCase = e => {
         e.preventDefault();
-        console.log("it works");
-        console.log(this.state.businessCase);
         updateSiteInformation(this.state.businessCase);
+
     }
+
+    isBusinessCase() {
+        if (this.state.businessCase) {
+            return <Grid item xs={12} s={12} m={6} zeroMinWidth>
+                <h4>All requests</h4>
+                <AdminRequests/>
+            </Grid>
+        }
+    }
+
 
 
     render() {
@@ -43,7 +47,7 @@ class Admin extends React.Component {
                 <h1>Admin</h1>
                 <SpaceForm/>
                 <h4>COVID MODE</h4>
-                <form onSubmit={this.printttt}>
+                <form onSubmit={this.submitBusinessCase}>
                     <InputLabel >Require Business Case?</InputLabel>
                     <Select
                         id="demo-simple-select"
@@ -60,11 +64,9 @@ class Admin extends React.Component {
                         <h4>All bookings</h4>
                         <AllBookings/>
                     </Grid>
-                    <Grid item xs={12} s={12} m={6} zeroMinWidth>
-                        <h4>All requests</h4>
-                        <AdminRequests/>
-                    </Grid>
+                    {this.isBusinessCase()}
                 </Grid>
+
             </div>
 
         );

@@ -7,7 +7,12 @@ export function getSpaceByID(spaceId) {
 }
 
 export function getAllSpaces() {
-    return db.collection("spaces").orderBy('number');
+    return new Promise((resolve, reject) => {
+        db.collection("spaces").orderBy('number').get().then((snapshot) => {
+                let updatedData = snapshot.docs.map(doc => doc)
+                resolve(updatedData)
+            }, reject)
+    })
 }
 
 export function getFreeSpaces() {

@@ -1,13 +1,3 @@
-export let processChangesForSnapshot = (doc, snapshot) => {
-    let updatedDocs = doc;
-    snapshot.docChanges().forEach(change =>{
-        let newDocs = processChange(updatedDocs, change);
-        if(newDocs !== undefined){
-            updatedDocs = newDocs
-        }
-    });
-    return updatedDocs;
-};
 
 export const processChange = (docs, change) => {
     switch (change.type) {

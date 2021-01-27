@@ -15,14 +15,12 @@ export function makeRequest(spaceId, userId, arrivalDate, departureDate, busines
 
 export async function getRequestByUserId(userId) {
     let requests = [];
-    await db.collection("requests").where("userId", "==", userId).get().then(function(querySnapshot) {
+    await db.collection("requests").where("userId", "==", userId).onSnapshot(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
             requests.push(doc)
         });
     })
-        .catch(function(error) {
-            console.log("Error getting documents: ", error);
-        });
+
 
     return requests;
 
@@ -30,28 +28,24 @@ export async function getRequestByUserId(userId) {
 
 export async function getAllRequests() {
     let requests = [];
-    await db.collection("requests").orderBy('userId').get().then(function (querySnapshot) {
+    await db.collection("requests").orderBy('userId').onSnapshot(function (querySnapshot) {
         querySnapshot.forEach(function(doc) {
             requests.push(doc)
         });
     })
-        .catch(function(error) {
-            console.log("Error getting documents: ", error);
-        });
+
 
     return requests;
 }
 
 export async function getAllPendingRequests() {
     let requests = [];
-    await db.collection("requests").where("status", "==", "Pending").get().then(function (querySnapshot) {
+    await db.collection("requests").where("status", "==", "Pending").onSnapshot(function (querySnapshot) {
         querySnapshot.forEach(function(doc) {
             requests.push(doc)
         });
     })
-        .catch(function(error) {
-            console.log("Error getting documents: ", error);
-        });
+
 
     return requests;
 }

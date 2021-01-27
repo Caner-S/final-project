@@ -6,7 +6,11 @@ class Stats extends React.Component {
 
     render() {
         return (
-            <h1>test</h1>
+            <div>
+            <h1>Stats</h1>
+            <h2>Total Bookings Today</h2>
+                <h2>Area Breakdown</h2>
+            </div>
         );
     }
 }

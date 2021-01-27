@@ -8,7 +8,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import "./Spaces.css";
 import { getAllPendingRequests, updateStatus} from "../dao/RequestDao";
-import {makeBooking} from "../dao/BookingDao";
+import { makeBooking} from "../dao/BookingDao";
 import Confirm from "./Confirm";
 
 class AdminRequests extends React.Component {
@@ -19,11 +19,14 @@ class AdminRequests extends React.Component {
             open: false,
             id: 'test',
         };
+
     }
 
     componentDidMount() {
 
-        this.getRequests();
+        getAllPendingRequests().then(doc => {
+            this.setState({ requests: doc });
+        })
 
     }
 

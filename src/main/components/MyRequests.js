@@ -20,16 +20,22 @@ class MyBookings extends React.Component {
         this.state = {
             requests: [],
         };
+        getRequestByUserId(firebase.auth().currentUser.uid).then(doc => {
+            this.setState({ requests: doc });
+        })
     }
 
     componentDidMount() {
 
-        this.getRequests();
+        //this.getRequests();
+        getRequestByUserId(firebase.auth().currentUser.uid).then(doc => {
+            this.setState({ requests: doc });
+        })
 
     }
 
     async getRequests() {
-        this.setState({bookings: await getRequestByUserId(firebase.auth().currentUser.uid)});
+        this.setState({requests: await getRequestByUserId(firebase.auth().currentUser.uid)});
     }
 
 

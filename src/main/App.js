@@ -16,6 +16,7 @@ import Home from "./components/Home";
 import Admin from "./components/Admin";
 import Stats from "./components/Stats";
 import {getSiteInformation} from "./dao/EnvironmentDao";
+import MyRequests from "./components/MyRequests";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -23,14 +24,6 @@ function App() {
   const [auth, setAuth] = useState(false);
   const [businessCase, setBusinessCase] = useState(false);
 
-  const mystyle = {
-    width: "100%",
-    height: "100%",
-    position: "fixed",
-    zIndex: "-100",
-    top: "0px",
-    left: "0px",
-  };
 
   useEffect( () => {
     getSiteInformation().onSnapshot(snapshot => {
@@ -40,7 +33,7 @@ function App() {
         setBusinessCase(snapshot.data().businessCase);
       }});
 
-    setTimeout(() => setLoading(false), 1000);
+
     const unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => {
       setUser(!!user);
         getAdmin(firebase.auth().currentUser.uid).onSnapshot(res => {
@@ -49,6 +42,8 @@ function App() {
           }
         });
     });
+
+    setTimeout(() => setLoading(false), 1000);
 
     return () => unregisterAuthObserver();
   }, [])
@@ -59,6 +54,13 @@ function App() {
       return <Route path="/admin" >
         <Admin businessCase={businessCase}/>
       </Route>
+    }
+  }
+
+  function requests() {
+    if(businessCase){
+      return <div>
+        <MyRequests/></div>
     }
   }
 
@@ -73,6 +75,7 @@ function App() {
           <Switch>
             <Route path="/mybookings">
               <MyBookings/>
+              {requests()}
             </Route>
             {adminPage()}
             <Route path="/stats">
@@ -94,7 +97,7 @@ function App() {
 
       )}
       </div>
-        <ParticlesBg id="testtt" type="circle" color={["#c0fdff", "#d0d1ff","#deaaff","#ecbcfd","#ffcbf2",]} num={5} bg={true} classname="background"/>
+        <ParticlesBg type="circle" color={["#c0fdff", "#d0d1ff","#deaaff","#ecbcfd","#ffcbf2",]} num={5} bg={true} classname="background"/>
         </Router>
 
 
