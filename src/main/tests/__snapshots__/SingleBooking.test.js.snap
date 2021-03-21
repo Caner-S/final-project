@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly when there are no items 1`] = `
+<div
+  className="MuiPaper-root singleBookingPaper MuiPaper-elevation1 MuiPaper-rounded"
+>
+  <h3
+    className="MuiTypography-root MuiTypography-h3"
+  >
+    Please select a space on the left
+  </h3>
+</div>
+`;

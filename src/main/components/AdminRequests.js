@@ -7,32 +7,36 @@ import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import "./Spaces.css";
-import { getAllPendingRequests, updateStatus} from "../dao/RequestDao";
+import {getAllPendingRequests, updateStatus} from "../dao/RequestDao";
 import { makeBooking} from "../dao/BookingDao";
 import Confirm from "./Confirm";
+import firebase from "../../config/firebase";
 
 class AdminRequests extends React.Component {
     constructor() {
         super();
         this.state = {
             requests: [],
-            open: false,
-            id: 'test',
         };
 
     }
 
     componentDidMount() {
+        let currentComponent = this;
+        if(firebase.auth().currentUser){
+        getAllPendingRequests(firebase.auth().currentUser.uid).then(function(querySnapshot) {
+            querySnapshot.forEach(function(doc) {
+                let updatedData = querySnapshot.docs.map(doc => doc)
+                currentComponent.setState({ requests: updatedData })
 
-        getAllPendingRequests().then(doc => {
-            this.setState({ requests: doc });
+            })
         })
+        }
+
+
 
     }
 
-    async getRequests() {
-        this.setState({requests: await getAllPendingRequests()});
-    }
 
     approveRequest(request){
         //set status to approved
@@ -74,11 +78,11 @@ class AdminRequests extends React.Component {
                                     <TableCell align="right">{new Date(request.data().departureDate).toLocaleString()}</TableCell>
                                     <TableCell align="right">{request.data().businessCase}</TableCell>
                                     <TableCell align="right">
-                                        <Confirm buttonText="Approve" title={"Approve a request"} description={"lol"} onAccept={() => { this.approveRequest(request)}} />
+                                        <Confirm buttonText="Approve" title={"Approve a request"} description={"Are you sure you want to approve request "+request.data().spaceId+"?"} onAccept={() => { this.approveRequest(request)}} />
 
                                     </TableCell>
                                     <TableCell align="right">
-                                        <Confirm buttonText="Deny" title={"Deny a request"} description={"lol"} onAccept={() => { this.cancelRequest(request)}} />
+                                        <Confirm buttonText="Deny" title={"Deny a request"} description={"Are you sure you want to deny request "+request.data().spaceId+"?"} onAccept={() => { this.cancelRequest(request)}} />
 
                                     </TableCell>
                                 </TableRow>

@@ -8,8 +8,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import {Button} from "@material-ui/core";
-import {updateSiteInformation} from "../dao/EnvironmentDao";
-//import SnackbarSuccess from "./SnackbarSuccess";
+import { updateSiteInformation} from "../dao/EnvironmentDao";
 
 class Admin extends React.Component {
     constructor() {
@@ -17,6 +16,12 @@ class Admin extends React.Component {
         this.state = {
             businessCase: false,
         };
+
+
+    }
+
+    componentDidMount() {
+        this.setState({businessCase: this.props.businessCase});
     }
 
     handleChange = (event) => {
@@ -30,14 +35,13 @@ class Admin extends React.Component {
     }
 
     isBusinessCase() {
-        if (this.state.businessCase) {
+        if (this.props.businessCase) {
             return <Grid item xs={12} s={12} m={6} zeroMinWidth>
                 <h4>All requests</h4>
                 <AdminRequests/>
             </Grid>
         }
     }
-
 
 
     render() {
@@ -48,7 +52,7 @@ class Admin extends React.Component {
                 <SpaceForm/>
                 <h4>COVID MODE</h4>
                 <form onSubmit={this.submitBusinessCase}>
-                    <InputLabel >Require Business Case?</InputLabel>
+                    <InputLabel>Require Business Case?</InputLabel>
                     <Select
                         id="demo-simple-select"
                         value={businessCase}
@@ -57,7 +61,7 @@ class Admin extends React.Component {
                         <MenuItem value={true}>Yes</MenuItem>
                         <MenuItem value={false}>No</MenuItem>
                     </Select>
-                    <Button type="submit" >Submit</Button>
+                    <Button type="submit">Submit</Button>
                 </form>
                 <Grid container>
                     <Grid item xs={12} s={12} m={6} zeroMinWidth>
@@ -72,4 +76,5 @@ class Admin extends React.Component {
         );
     }
 }
+
 export default Admin;

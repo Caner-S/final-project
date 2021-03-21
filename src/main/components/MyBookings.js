@@ -20,7 +20,6 @@ class MyBookings extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            spaces: [],
             bookings: [],
             open: false,
             id: 'test',
@@ -31,12 +30,19 @@ class MyBookings extends React.Component {
 
 
     componentDidMount(){
-        getBookingsByUserID(firebase.auth().currentUser.uid).onSnapshot((snapshot) => {
+        let currentComponent = this;
+        if(firebase.auth().currentUser){
+        getBookingsByUserID(firebase.auth().currentUser.uid).then((snapshot) => {
             console.log('onSnapshot Called!')
             let updatedData = snapshot.docs.map(doc => doc)
-            this.setState({ bookings: updatedData });
+            currentComponent.setState({ bookings: updatedData });
 
-        })
+        })}
+    }
+
+    cancelBooking(id){
+        this.setState({bookings: this.state.bookings.filter(item => item.id !== id)});
+        deleteBooking(id);
     }
 
 
@@ -45,7 +51,8 @@ class MyBookings extends React.Component {
         let {bookings} = this.state;
         return (
             <div className="BookingsBorder">
-                <TableContainer component={Paper}>
+                <h4>My Bookings</h4>
+                <TableContainer component={Paper} className="container">
                     <Table aria-label="simple table">
                         <TableHead>
                             <TableRow>
@@ -73,7 +80,7 @@ class MyBookings extends React.Component {
                                         }} /></Button>
                                     </TableCell>
                                     <TableCell align="right">
-                                        <Confirm buttonText="Cancel Booking" title={"Cancel a booking"} description={"lol"} onAccept={() => { deleteBooking(booking.id)}} />
+                                        <Confirm buttonText="Cancel Booking" title={"Cancel a booking"} description={"Are you sure you want to cancel your booking for space "+booking.data().seatNumber+" at "+ new Date(booking.data().arrivalDate).toLocaleString() +"?"} onAccept={() => { this.cancelBooking(booking.id)}} />
 
                                     </TableCell>
                                 </TableRow>

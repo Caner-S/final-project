@@ -31,7 +31,7 @@ export default function ConfirmInput(props) {
                 {props.buttonText}
             </Button>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+                <DialogTitle id="form-dialog-title">{props.title}</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
                         {props.description}

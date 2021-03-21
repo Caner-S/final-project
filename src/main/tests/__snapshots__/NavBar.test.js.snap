@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly when there are no items 1`] = `
+<ul
+  className="NavUl"
+>
+  <li
+    className="NavLi"
+  >
+    <a
+      href="/"
+    >
+      Home
+    </a>
+  </li>
+  <li
+    className="NavLi"
+  >
+    <a
+      href="mybookings"
+    >
+      My Bookings
+    </a>
+  </li>
+  <li
+    className="NavLi"
+  >
+    <a
+      href="stats"
+    >
+      Stats
+    </a>
+  </li>
+  <li
+    className="NavLi"
+    style={
+      Object {
+        "float": "right",
+      }
+    }
+  >
+    <a
+      onClick={[Function]}
+    >
+      Sign Out
+    </a>
+  </li>
+</ul>
+`;

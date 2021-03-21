@@ -12,7 +12,7 @@ import Confirm from "./Confirm";
 import {deleteRequest, getRequestByUserId} from "../dao/RequestDao";
 
 
-class MyBookings extends React.Component {
+class MyRequests extends React.Component {
 
 
     constructor() {
@@ -20,30 +20,38 @@ class MyBookings extends React.Component {
         this.state = {
             requests: [],
         };
-        getRequestByUserId(firebase.auth().currentUser.uid).then(doc => {
-            this.setState({ requests: doc });
-        })
+
     }
 
     componentDidMount() {
 
-        //this.getRequests();
-        getRequestByUserId(firebase.auth().currentUser.uid).then(doc => {
-            this.setState({ requests: doc });
+        let currentComponent = this;
+        if(firebase.auth().currentUser){
+        getRequestByUserId(firebase.auth().currentUser.uid).then(function(querySnapshot) {
+            querySnapshot.forEach(function(doc) {
+                let updatedData = querySnapshot.docs.map(doc => doc)
+                currentComponent.setState({ requests: updatedData })
+
+            })
         })
+        }
 
     }
 
-    async getRequests() {
-        this.setState({requests: await getRequestByUserId(firebase.auth().currentUser.uid)});
+    cancelRequest(id){
+        this.setState({requests: this.state.requests.filter(item => item.id !== id)});
+        deleteRequest(id);
     }
+
+
 
 
     render() {
         let {requests} = this.state;
         return (
             <div className="BookingsBorder">
-                <TableContainer component={Paper}>
+                <h4>My Requests</h4>
+                <TableContainer component={Paper} className="container">
                     <Table aria-label="simple table">
                         <TableHead>
                             <TableRow>
@@ -65,7 +73,7 @@ class MyBookings extends React.Component {
                                     <TableCell align="right">{new Date(request.data().arrivalDate).toLocaleString()}</TableCell>
                                     <TableCell align="right">{new Date(request.data().departureDate).toLocaleString()}</TableCell>
                                     <TableCell align="right">
-                                        <Confirm buttonText="Cancel Request" title={"Cancel a Request"} description={"lol"} onAccept={() => { deleteRequest(request.id)}} />
+                                        <Confirm buttonText="Cancel Request" title={"Cancel a Request"} description={"Are you sure you want to cancel your request "+request.data().spaceId+" at "+ new Date(request.data().arrivalDate).toLocaleString() +"?"} onAccept={() => { this.cancelRequest(request.id)}} />
 
                                     </TableCell>
                                 </TableRow>
@@ -79,4 +87,4 @@ class MyBookings extends React.Component {
         );
     }
 }
-export default MyBookings;
+export default MyRequests;

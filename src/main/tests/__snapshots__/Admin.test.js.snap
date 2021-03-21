@@ -1,0 +1,229 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly when there are no items 1`] = `
+<div>
+  <h1>
+    Admin
+  </h1>
+  <div>
+    <h4>
+      New Office space
+    </h4>
+    <form
+      onSubmit={[Function]}
+    >
+      <input
+        name="number"
+        onChange={[Function]}
+        placeholder="Number"
+        type="number"
+        value={null}
+      />
+      <input
+        name="capacity"
+        onChange={[Function]}
+        placeholder="Capacity"
+        type="number"
+        value={null}
+      />
+      <select
+        name="type"
+        onChange={[Function]}
+        placeholder="Type"
+        value={null}
+      >
+        <option
+          value="Desk"
+        >
+          Desk
+        </option>
+        <option
+          value="Meeting Room"
+        >
+          Meeting Room
+        </option>
+        <option
+          value="Workspace"
+        >
+          Workspace
+        </option>
+      </select>
+      <input
+        name="exclusive"
+        onChange={[Function]}
+        placeholder="Exclusive"
+        type="text"
+        value={null}
+      />
+      <input
+        name="section"
+        onChange={[Function]}
+        placeholder="Section"
+        type="number"
+        value={null}
+      />
+      <input
+        name="floor"
+        onChange={[Function]}
+        placeholder="Floor"
+        type="number"
+        value={null}
+      />
+      <button
+        type="submit"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+  <h4>
+    COVID MODE
+  </h4>
+  <form
+    onSubmit={[Function]}
+  >
+    <label
+      className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-animated"
+    >
+      Require Business Case?
+    </label>
+    <div
+      className="MuiInputBase-root MuiInput-root MuiInput-underline"
+      onClick={[Function]}
+    >
+      <div
+        aria-haspopup="listbox"
+        aria-labelledby="demo-simple-select"
+        className="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input"
+        id="demo-simple-select"
+        onBlur={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onMouseDown={[Function]}
+        role="button"
+        tabIndex={0}
+      >
+        <span
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "&#8203;",
+            }
+          }
+        />
+      </div>
+      <input
+        aria-hidden={true}
+        className="MuiSelect-nativeInput"
+        onAnimationStart={[Function]}
+        onChange={[Function]}
+        tabIndex={-1}
+      />
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root MuiSelect-icon"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M7 10l5 5 5-5z"
+        />
+      </svg>
+    </div>
+    <button
+      className="MuiButtonBase-root MuiButton-root MuiButton-text"
+      disabled={false}
+      onBlur={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex={0}
+      type="submit"
+    >
+      <span
+        className="MuiButton-label"
+      >
+        Submit
+      </span>
+      <span
+        className="MuiTouchRipple-root"
+      />
+    </button>
+  </form>
+  <div
+    className="MuiGrid-root MuiGrid-container"
+  >
+    <div
+      className="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth MuiGrid-grid-xs-12"
+      m={6}
+      s={12}
+    >
+      <h4>
+        All bookings
+      </h4>
+      <div
+        className="BookingsBorder"
+      >
+        <div
+          className="MuiPaper-root MuiTableContainer-root container MuiPaper-elevation1 MuiPaper-rounded"
+        >
+          <table
+            aria-label="simple table"
+            className="MuiTable-root"
+            role={null}
+          >
+            <thead
+              className="MuiTableHead-root"
+              role={null}
+            >
+              <tr
+                className="MuiTableRow-root MuiTableRow-head"
+                role={null}
+              >
+                <th
+                  aria-sort={null}
+                  className="MuiTableCell-root MuiTableCell-head"
+                  scope="col"
+                >
+                  User Id
+                </th>
+                <th
+                  aria-sort={null}
+                  className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignRight"
+                  scope="col"
+                >
+                  Space Number
+                </th>
+                <th
+                  aria-sort={null}
+                  className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignRight"
+                  scope="col"
+                >
+                  Arrival Time
+                </th>
+                <th
+                  aria-sort={null}
+                  className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignRight"
+                  scope="col"
+                >
+                  Departure Time
+                </th>
+              </tr>
+            </thead>
+            <tbody
+              className="MuiTableBody-root"
+              role={null}
+            />
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

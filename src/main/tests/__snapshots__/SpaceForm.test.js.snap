@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly when there are no items 1`] = `
+<div>
+  <h4>
+    New Office space
+  </h4>
+  <form
+    onSubmit={[Function]}
+  >
+    <input
+      name="number"
+      onChange={[Function]}
+      placeholder="Number"
+      type="number"
+      value={null}
+    />
+    <input
+      name="capacity"
+      onChange={[Function]}
+      placeholder="Capacity"
+      type="number"
+      value={null}
+    />
+    <select
+      name="type"
+      onChange={[Function]}
+      placeholder="Type"
+      value={null}
+    >
+      <option
+        value="Desk"
+      >
+        Desk
+      </option>
+      <option
+        value="Meeting Room"
+      >
+        Meeting Room
+      </option>
+      <option
+        value="Workspace"
+      >
+        Workspace
+      </option>
+    </select>
+    <input
+      name="exclusive"
+      onChange={[Function]}
+      placeholder="Exclusive"
+      type="text"
+      value={null}
+    />
+    <input
+      name="section"
+      onChange={[Function]}
+      placeholder="Section"
+      type="number"
+      value={null}
+    />
+    <input
+      name="floor"
+      onChange={[Function]}
+      placeholder="Floor"
+      type="number"
+      value={null}
+    />
+    <button
+      type="submit"
+    >
+      Submit
+    </button>
+  </form>
+</div>
+`;

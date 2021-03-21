@@ -3,19 +3,12 @@ import firebase from "../../config/firebase";
 const db = firebase.firestore();
 
 export const getBookingsByUserID = (userId) => {
-    return db.collection("bookings").where("userId", "==", userId);
+    return db.collection("bookings").where("userId", "==", userId).get();
 }
 
 
 export const getAllBookings = () => {
-    return new Promise((resolve, reject) => {
-        db.collection("bookings").orderBy('userId')
-            .onSnapshot((snapshot) => {
-
-                let updatedData = snapshot.docs.map(doc => doc)
-                resolve(updatedData)
-            }, reject)
-    })
+    return db.collection("bookings").orderBy('userId').get();
 }
 
 

@@ -1,0 +1,224 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly when there are no items 1`] = `
+<div>
+  <div
+    className="MuiGrid-root MuiGrid-container"
+  >
+    <div
+      className="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth MuiGrid-grid-xs-6"
+      s={6}
+    >
+      <div
+        aria-label="booking view"
+        className="MuiToggleButtonGroup-root"
+        role="group"
+      >
+        <button
+          aria-label="table view"
+          aria-pressed={true}
+          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal Mui-selected"
+          disabled={false}
+          onBlur={[Function]}
+          onChange={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+          value="table"
+        >
+          <span
+            className="MuiToggleButton-label"
+          >
+            Table View
+          </span>
+        </button>
+        <button
+          aria-label="floorplan view"
+          aria-pressed={false}
+          className="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal"
+          disabled={false}
+          onBlur={[Function]}
+          onChange={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+          value="floorplan"
+        >
+          <span
+            className="MuiToggleButton-label"
+          >
+            Floorplan View
+          </span>
+        </button>
+      </div>
+    </div>
+    <div
+      className="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth MuiGrid-grid-xs-6"
+      s={6}
+    >
+      <form>
+        <div
+          className="MuiFormControl-root MuiTextField-root"
+        >
+          <label
+            className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled"
+            data-shrink={true}
+            htmlFor="datetime-local-arrive"
+            id="datetime-local-arrive-label"
+          >
+            Arrival Date
+          </label>
+          <div
+            className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
+            onClick={[Function]}
+          >
+            <input
+              aria-invalid={false}
+              autoFocus={false}
+              className="MuiInputBase-input MuiInput-input"
+              disabled={false}
+              id="datetime-local-arrive"
+              name="arrivalDate"
+              onAnimationStart={[Function]}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              required={false}
+              type="datetime-local"
+              value="2021-03-19T09:00"
+            />
+          </div>
+        </div>
+        <div
+          className="MuiFormControl-root MuiTextField-root"
+        >
+          <label
+            className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled"
+            data-shrink={true}
+            htmlFor="datetime-local-depart"
+            id="datetime-local-depart-label"
+          >
+            Departure Date
+          </label>
+          <div
+            className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
+            onClick={[Function]}
+          >
+            <input
+              aria-invalid={false}
+              autoFocus={false}
+              className="MuiInputBase-input MuiInput-input"
+              disabled={false}
+              id="datetime-local-depart"
+              name="departureDate"
+              onAnimationStart={[Function]}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              required={false}
+              type="datetime-local"
+              value="2021-03-19T17:00"
+            />
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div
+    className="MuiGrid-root MuiGrid-container"
+  >
+    <div
+      className="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth MuiGrid-grid-xs-6"
+      s={6}
+    >
+      <object
+        aria-label="floorPlan"
+        data="6th Floor Holborn.svg"
+        id="svg"
+        onLoad={[Function]}
+      />
+    </div>
+    <div
+      className="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth MuiGrid-grid-xs-6"
+      s={6}
+    >
+      <div
+        className="border"
+      >
+        <div
+          className="MuiPaper-root MuiTableContainer-root container MuiPaper-elevation1 MuiPaper-rounded"
+        >
+          <table
+            aria-label="simple table"
+            className="MuiTable-root"
+            role={null}
+          >
+            <thead
+              className="MuiTableHead-root"
+              role={null}
+            >
+              <tr
+                className="MuiTableRow-root MuiTableRow-head"
+                role={null}
+              >
+                <th
+                  aria-sort={null}
+                  className="MuiTableCell-root MuiTableCell-head"
+                  scope="col"
+                >
+                  Seat Number
+                </th>
+                <th
+                  aria-sort={null}
+                  className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignRight"
+                  scope="col"
+                >
+                  Capacity
+                </th>
+                <th
+                  aria-sort={null}
+                  className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignRight"
+                  scope="col"
+                >
+                  Type
+                </th>
+                <th
+                  aria-sort={null}
+                  className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignRight"
+                  scope="col"
+                >
+                  Floor
+                </th>
+              </tr>
+            </thead>
+            <tbody
+              className="MuiTableBody-root"
+              role={null}
+            />
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

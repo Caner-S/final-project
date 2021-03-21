@@ -7,7 +7,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
-import "./Spaces.css";
+import "./MyBookings.css";
 import Confirm from "./Confirm";
 
 class AllBookings extends React.Component {
@@ -15,25 +15,23 @@ class AllBookings extends React.Component {
         super();
         this.state = {
             bookings: [],
-            open: false,
-            id: 'test',
         };
-        getAllBookings().then(doc => {
-            this.setState({ bookings: doc });
-        })
     }
 
     componentDidMount() {
+        let currentComponent = this;
+        getAllBookings().then((snapshot) => {
+            let updatedData = snapshot.docs.map(doc => doc)
+            currentComponent.setState({ bookings: updatedData });
 
-        //this.getBookings();
-        getAllBookings().then(doc => {
-            this.setState({ bookings: doc });
         })
+
 
     }
 
-    async getBookings() {
-        this.setState({bookings: await getAllBookings()});
+    cancelBooking(id){
+        this.setState({bookings: this.state.bookings.filter(item => item.id !== id)});
+        deleteBooking(id);
     }
 
 
@@ -47,7 +45,7 @@ class AllBookings extends React.Component {
                         <TableHead>
                             <TableRow>
                                 <TableCell>User&nbsp;Id</TableCell>
-                                <TableCell align="right">Space&nbsp;Id</TableCell>
+                                <TableCell align="right">Space&nbsp;Number</TableCell>
                                 <TableCell align="right">Arrival Time</TableCell>
                                 <TableCell align="right">Departure Time</TableCell>
                             </TableRow>
@@ -58,11 +56,11 @@ class AllBookings extends React.Component {
                                     <TableCell component="th" scope="row">
                                         {booking.data().userId}
                                     </TableCell>
-                                    <TableCell align="right">{booking.data().spaceId}</TableCell>
+                                    <TableCell align="right">{booking.data().seatNumber}</TableCell>
                                     <TableCell align="right">{new Date(booking.data().arrivalDate).toLocaleString()}</TableCell>
                                     <TableCell align="right">{new Date(booking.data().departureDate).toLocaleString()}</TableCell>
                                     <TableCell align="right">
-                                        <Confirm buttonText="Cancel Booking" title={"Cancel a booking"} description={"lol"} onAccept={() => { deleteBooking(booking.id)}} />
+                                        <Confirm buttonText="Cancel Booking" title={"Cancel a booking"} description={"Are you sure you want to cancel booking "+booking.data().id+"?"} onAccept={() => { this.cancelBooking(booking.id)}} />
 
                                     </TableCell>
                                 </TableRow>
