@@ -15,6 +15,11 @@
   pointer-events: none;
 }
 
+.App-logo {
+  width: 20%;
+  pointer-events: none;
+}
+
 .App-logo-loading {
   width: 20%;
   pointer-events: none;
@@ -32,7 +37,7 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo-loading {
-    animation: App-logo-infinspin infinite 21s;
+    animation: App-logo-spin infinite 1.5s;
   }
 }
 

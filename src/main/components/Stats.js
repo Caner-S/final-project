@@ -1,5 +1,6 @@
 import React from 'react';
 import { getUnavailableBookings} from "../dao/BookingDao";
+import './Stats.css';
 
 class Stats extends React.Component {
     constructor() {
@@ -34,7 +35,7 @@ class Stats extends React.Component {
             <h1>Stats</h1>
             <h2>Total Bookings Today</h2>
                 <h1>{((this.state.bookings.length/209)*100).toFixed(2)}%</h1>
-                <h2>Area Breakdown</h2>
+
             </div>
         );
     }

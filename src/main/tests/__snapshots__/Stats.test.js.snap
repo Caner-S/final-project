@@ -12,8 +12,5 @@ exports[`renders correctly when there are no items 1`] = `
     0.00
     %
   </h1>
-  <h2>
-    Area Breakdown
-  </h2>
 </div>
 `;

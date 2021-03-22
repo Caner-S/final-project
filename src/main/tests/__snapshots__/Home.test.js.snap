@@ -105,7 +105,7 @@ exports[`renders correctly when there are no items 1`] = `
               onFocus={[Function]}
               required={false}
               type="datetime-local"
-              value="2021-03-19T09:00"
+              value="2021-03-22T09:00"
             />
           </div>
         </div>
@@ -137,7 +137,7 @@ exports[`renders correctly when there are no items 1`] = `
               onFocus={[Function]}
               required={false}
               type="datetime-local"
-              value="2021-03-19T17:00"
+              value="2021-03-22T17:00"
             />
           </div>
         </div>

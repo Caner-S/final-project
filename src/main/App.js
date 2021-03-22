@@ -93,7 +93,9 @@ function App() {
                 </div>
 
       ) : (
-          <img src={logo} className="App-logo-loading" alt="logo" />
+          <div className="login">
+          <img src={logo} className="App-logo-login" alt="logo" />
+          </div>
 
       )}
       </div>
